@@ -1,4 +1,4 @@
 interface:
   display_name: "English Communication Guard"
-  short_description: "Catch task-relevant English ambiguity before Claude Code acts."
-  default_prompt: "Use this skill when my English wording may cause Claude Code to misunderstand a coding task, scope, or safety-sensitive action."
+  short_description: "Correct English errors and clarify task ambiguity before Claude Code acts."
+  default_prompt: "Use this skill when my English wording has grammar/expression errors or may cause Claude Code to misunderstand a coding task, scope, or safety-sensitive action."
