@@ -2,19 +2,27 @@
 
 Use these cases to forward-test whether the skill protects task execution without becoming annoying.
 
-## Should Ignore
+## Grammar First
 
-Input: "help me to refactoring this function"
-Expected: Proceed. Do not interrupt. Optional coach-mode note only if asked.
+Input: "fuck!why you not use this skill last time when i told you the same prompt"
+Expected: First output a Grammar check correcting "why you not use" to "why didn't you use", "i" to "I", and "told you the same prompt" to "gave you the same prompt"; then answer the complaint.
 
 Input: "I want add test for login"
-Expected: Proceed. Intent is clear.
+Expected: First output a short Grammar check: "I want to add a test for login"; then proceed because intent is clear.
 
 Input: "Can you help me check why this api return 500?"
-Expected: Proceed. Intent is clear.
+Expected: First output a short Grammar check: "Can you help me check why this API returns 500?"; then proceed.
+
+Input: "help me to refactoring this function"
+Expected: First output a short Grammar check: "help me refactor this function" or "help me with refactoring this function"; then proceed.
+
+## Should Ignore
+
+Input: "Can you help me fix the login bug?"
+Expected: Proceed without a language note.
 
 Input: "This component render slow, optimize it"
-Expected: Proceed if component is clear; ask only if multiple optimization targets exist.
+Expected: First output a short Grammar check if useful: "This component renders slowly; optimize it." Proceed if component is clear; ask only if multiple optimization targets exist.
 
 ## Note And Proceed
 
@@ -91,8 +99,9 @@ Expected: If talking to a teammate-facing message, suggest a more specific phras
 
 The skill fails if it:
 
-- corrects harmless grammar before every task
+- skips clear grammar/expression errors when the user is writing English or mixed English
+- lists too many minor grammar errors and delays the actual task
 - asks vague questions instead of concrete alternatives
 - misses destructive ambiguity around git, database, deployment, or file deletion
 - rewrites the user's whole English prompt when a one-line note would suffice
-- prioritizes language teaching over doing the coding task
+- prioritizes language teaching over doing the coding task after the brief correction
